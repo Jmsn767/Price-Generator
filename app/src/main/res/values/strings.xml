@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Price Generator</string>
+    <string name="TOW_text">Type of wood</string>
+    <string name="Back_text">Back Panel</string>
+    <string name="Door_text">Type of Doors</string>
+    <string name="draws_text">Number of Draws</string>
+    <string name="Comp_text">Level of complexity</string>
+    <string name="Finish_text">Level of finish</string>
+    <string name="height_hint">Inches</string>
+    <string name="Length_hint">Feet</string>
+    <string name="Height">Height (Inches)</string>
+    <string name="Length">Length (Feet)</string>
+    <string name="Unitprice">Unit Price:</string>
+    <string name="Total_Cost">Total Cost:</string>
+    <string name="Calculate">Calculate</string>
+    <string-array name="TOW">
+        <item>Local Wood</item>
+        <item>Imported Wood</item>
+    </string-array>
+    <string-array name="Back">
+        <item>No Back Panel</item>
+        <item>Includes Back Panel</item>
+    </string-array>
+    <string-array name="Doors">
+        <item>No Doors</item>
+        <item>Flat Panel Doors</item>
+        <item>Raised Panel Doors</item>
+
+    </string-array>
+    <string-array name="Draws">
+        <item>No draws</item>
+        <item>5 or less draws</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+    <string-array name="Complexity">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="Finish">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+</resources>
