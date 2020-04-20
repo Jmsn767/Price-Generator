@@ -1,10 +1,9 @@
 package com.example.pricegeneratorjava;
 
 import android.annotation.SuppressLint;
-
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,12 +46,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     double Complexityvalue;
     double Finishvalue;
     double Heightvalue;
-    double Lengthvalue;
 
 
     double unitprice;
     double totalprice;
-    int Morethan5draws = 0;
     Vibrator vibe;
 
 
@@ -90,11 +87,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
 
-        vibe = (Vibrator) getSystemService(this.VIBRATOR_SERVICE);
+        vibe = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         btn.setOnClickListener(new View.OnClickListener() {
 
-            @SuppressLint("SetTextI18n")
+            @SuppressLint({"SetTextI18n", "DefaultLocale"})
             @Override
 
             public void onClick(View view) {
@@ -113,12 +110,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Heightinput = Double.parseDouble(numstring1) ;
                 Lengthinput = Double.parseDouble(numstring2) ;
 
-                TOWvalue = TOWFinishIF(TOWinput).doubleValue();
-                Backvalue = BackIF(Backinput, Heightinput).doubleValue();
-                Doorsvalue = DoorsIF(Doorsinput, Heightinput).doubleValue();
-                Drawsvalue = DrawsIF(Drawsinput, Doorsinput).doubleValue();
-                Complexityvalue = ComplexityIF(Complexityinput).doubleValue();
-                Finishvalue = FinishIF(Finishinput).doubleValue();
+                TOWvalue = determineTOWValue(TOWinput);
+                Backvalue = determineBackValue(Backinput, Heightinput);
+                Doorsvalue = determineDoorsValue(Doorsinput, Heightinput);
+                Drawsvalue = determineDrawsValue(Drawsinput, Doorsinput);
+                Complexityvalue = ComplexityIF(Complexityinput);
+                Finishvalue = determineFinishValue(Finishinput);
                 Heightvalue = HeightIF(Heightinput);
 
 
@@ -159,9 +156,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Complexityinput = spinner5.getSelectedItem().toString();
 
                 Finishinput = spinner6.getSelectedItem().toString();
- return;
 
-        }
+    }
 
 
 
@@ -179,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-  public Double FinishIF( String Finishinput ) {
+  public Double determineFinishValue( String Finishinput ) {
      if (Finishinput.equals("1")) {
           Finishvalue = 0.82d;
       } else if (Finishinput.equals("3")) {
@@ -188,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
       return Finishvalue;
   }
-  public Double TOWFinishIF(String TOWinput) {
+  public Double determineTOWValue(String TOWinput) {
       if (TOWinput.equals("Local Wood")) {
           TOWvalue = 1.07d;
       } else TOWvalue = 1d;
@@ -196,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       return  TOWvalue;
   }
 
-  public Double BackIF(String Backinput, Double Heightinput) {
+  public Double determineBackValue(String Backinput, Double Heightinput) {
     if (Backinput.equals("Includes Back Panel") && Heightinput <= 48) {
           Backvalue = 1d;
       } else if (Backinput.equals("Includes Back Panel") && Heightinput >= 36) {
@@ -210,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       return Backvalue;
   }
 
-  public Double DoorsIF(String Doorsinput, Double Heightinput) {
+  public Double determineDoorsValue(String Doorsinput, Double Heightinput) {
      if (Doorsinput.equals("Flat Panel Doors") && Heightinput >= 48) {
           Doorsvalue = 4.0 / 3.0;
       } else if (Doorsinput.equals("Flat Panel Doors") && Heightinput >= 36) {
@@ -227,18 +223,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
       return Doorsvalue;
   }
-  public Double DrawsIF(String Drawsinput, String Doorsinput) {
+  public Double determineDrawsValue(String Drawsinput, String Doorsinput) {
 
       if (Drawsinput.equals("No draws")) {
           Drawsvalue = 0d;
-      } else if (Drawsinput.equals("5 or less draws") && (Doorsinput.equals("Flat Panel Doors") || Doorsinput.equals("Raised Panel Doors")) ) {
+      }else if (Drawsinput.equals("5 or less draws") && Doorsinput.equals("No Doors")) {
+          Drawsvalue = 60d;
+      }
+      else if (Drawsinput.equals("5 or less draws") && (Doorsinput.equals("Flat Panel Doors") || Doorsinput.equals("Raised Panel Doors")) ) {
           Drawsvalue = 5d;
 
       } else if (Double.parseDouble(Drawsinput) >= 6 && (Doorsinput.equals("Flat Panel Doors") || Doorsinput.equals("Raised Panel Doors"))) {
-          Drawsvalue = 5 + (Double.parseDouble(Drawsinput) -5) * 2d;
-      } else if (Drawsinput.equals("5 or less draws") && Doorsinput.equals("No Doors")) {
-          Drawsvalue = 60d;
-      } else if (Double.parseDouble(Drawsinput)>= 6 && Doorsinput.equals("No Doors")) {
+          Drawsvalue = 5d + (Double.parseDouble(Drawsinput) -5) * 2d;
+      }  else if (Double.parseDouble(Drawsinput)>= 6 && Doorsinput.equals("No Doors")) {
           Drawsvalue = 60d + (Double.parseDouble(Drawsinput) - 5) * 2d;
       } else Drawsvalue = 0d;
       return Drawsvalue;

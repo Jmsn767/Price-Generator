@@ -15,4 +15,4 @@
     android:textAlignment="center"
     android:textColor="@color/colortext"
     android:background="@color/colorPrimaryDark"
-    />
+    android:gravity="center_horizontal" />
