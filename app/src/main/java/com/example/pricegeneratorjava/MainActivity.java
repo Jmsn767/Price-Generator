@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       if (Drawsinput.equals("No draws")) {
           Drawsvalue = 0d;
       }else if (Drawsinput.equals("5 or less draws") && Doorsinput.equals("No Doors")) {
-          Drawsvalue = 60d;
+          Drawsvalue = 5;
       }
       else if (Drawsinput.equals("5 or less draws") && (Doorsinput.equals("Flat Panel Doors") || Doorsinput.equals("Raised Panel Doors")) ) {
           Drawsvalue = 5d;
@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
       } else if (Double.parseDouble(Drawsinput) >= 6 && (Doorsinput.equals("Flat Panel Doors") || Doorsinput.equals("Raised Panel Doors"))) {
           Drawsvalue = 5d + (Double.parseDouble(Drawsinput) -5) * 2d;
       }  else if (Double.parseDouble(Drawsinput)>= 6 && Doorsinput.equals("No Doors")) {
-          Drawsvalue = 60d + (Double.parseDouble(Drawsinput) - 5) * 2d;
+          Drawsvalue = (Double.parseDouble(Drawsinput) - 5) * 2d;
       } else Drawsvalue = 0d;
       return Drawsvalue;
 
